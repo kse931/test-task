@@ -1,5 +1,6 @@
 package org.filefilter;
 
+import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Command;
@@ -33,10 +34,12 @@ public class Main implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
+        System.out.println(outputDirectory + " " + prefix + " " + append + " " + fullStats + " " + shortStats + " " + inputFiles);
         return 0;
     }
 
     public static void main(String[] args) {
-
+        int exit = new CommandLine(new Main()).execute(args);
+        System.exit(exit);
     }
 }
