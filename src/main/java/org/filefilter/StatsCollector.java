@@ -3,7 +3,8 @@ package org.filefilter;
 import java.util.*;
 
 public class StatsCollector {
-    FileFilter fileFilter;
+
+    private final FileFilter fileFilter;
 
     public StatsCollector(FileFilter fileFilter){
         this.fileFilter = fileFilter;
@@ -33,7 +34,7 @@ public class StatsCollector {
             intMap.put("sum", intStats.getSum());
             intMap.put("average", intStats.getAverage());
 
-            allStats.put("ints", intMap);
+            allStats.put("Integers: ", intMap);
         }
     }
 
@@ -51,7 +52,7 @@ public class StatsCollector {
             doubleMap.put("sum", doubleStats.getSum());
             doubleMap.put("average", doubleStats.getAverage());
 
-            allStats.put("doubles", doubleMap);
+            allStats.put("Doubles: ", doubleMap);
         }
     }
 
@@ -74,8 +75,7 @@ public class StatsCollector {
             stringStats.put("minlen", minLen);
             stringStats.put("maxlen", maxLen);
 
-            allStats.put("strings", stringStats);
+            allStats.put("Strings: ", stringStats);
         }
     }
-
 }

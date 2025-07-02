@@ -13,9 +13,10 @@ public class FileFilter {
 
     private final Config configuration;
 
-    private List<String> stringsPrintQueue = new ArrayList<>(); //TODO: check if there is a better option
-    private List<Long> integerPrintQueue = new ArrayList<>();
-    private List<Double> doublesPrintQueue = new ArrayList<>();
+    private final List<String> stringsPrintQueue = new ArrayList<>();
+    private final List<Long> integerPrintQueue = new ArrayList<>();
+    private final List<Double> doublesPrintQueue = new ArrayList<>();
+
     public FileFilter(Config configuration){
         this.configuration = configuration;
     }
