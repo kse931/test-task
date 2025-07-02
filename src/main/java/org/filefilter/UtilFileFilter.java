@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileFilter {
+public class UtilFileFilter {
 
     private final Config configuration;
 
@@ -17,7 +17,7 @@ public class FileFilter {
     private final List<Long> integerPrintQueue = new ArrayList<>();
     private final List<Double> doublesPrintQueue = new ArrayList<>();
 
-    public FileFilter(Config configuration){
+    public UtilFileFilter(Config configuration){
         this.configuration = configuration;
     }
 

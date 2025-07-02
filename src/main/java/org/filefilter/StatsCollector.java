@@ -4,10 +4,10 @@ import java.util.*;
 
 public class StatsCollector {
 
-    private final FileFilter fileFilter;
+    private final UtilFileFilter utilFileFilter;
 
-    public StatsCollector(FileFilter fileFilter){
-        this.fileFilter = fileFilter;
+    public StatsCollector(UtilFileFilter utilFileFilter){
+        this.utilFileFilter = utilFileFilter;
     }
 
     public Map<String, Map<String, Object>> collectAllStats(){
@@ -21,7 +21,7 @@ public class StatsCollector {
     }
 
     private void collectIntStats (Map<String, Map<String, Object>> allStats) {
-        List<Long> ints = fileFilter.getIntegerPrintQueue();
+        List<Long> ints = utilFileFilter.getIntegerPrintQueue();
         if (!ints.isEmpty()){
             LongSummaryStatistics intStats = ints.stream()
                     .mapToLong(Long::longValue)
@@ -39,7 +39,7 @@ public class StatsCollector {
     }
 
     private void collectDoubleStats (Map<String, Map<String, Object>> allStats) {
-        List<Double> doubles = fileFilter.getDoublesPrintQueue();
+        List<Double> doubles = utilFileFilter.getDoublesPrintQueue();
         if (!doubles.isEmpty()){
             DoubleSummaryStatistics doubleStats = doubles.stream()
                     .mapToDouble(Double::doubleValue)
@@ -57,7 +57,7 @@ public class StatsCollector {
     }
 
     private void collectStringStats(Map<String, Map<String, Object>> allStats){
-        List<String> strings = fileFilter.getStringsPrintQueue();
+        List<String> strings = utilFileFilter.getStringsPrintQueue();
         if (!strings.isEmpty()){
             Map<String, Object> stringStats = new HashMap<>();
             stringStats.put("count", strings.size());

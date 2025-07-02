@@ -42,16 +42,21 @@ public class Main implements Callable<Integer> {
             System.out.println("Processing...");
 
             Config utilConfig = new Config(outputDirectory, prefix, append, fullStats, shortStats, inputFiles);
-            FileFilter fileFilter = new FileFilter(utilConfig);
-            fileFilter.processFiles();
-            StatsCollector statsCollector = new StatsCollector(fileFilter);
+            UtilFileFilter utilFileFilter = new UtilFileFilter(utilConfig);
+            utilFileFilter.processFiles();
 
-            System.out.println(statsCollector.collectAllStats());
+            UtilFilePrinter ufp = new UtilFilePrinter(utilFileFilter);
+            ufp.printToFiles();
+            System.out.println("Finished");
+            StatsCollector statsCollector = new StatsCollector(utilFileFilter);
+            StatsPrinter statsPrinter = new StatsPrinter(utilConfig);
+            System.out.println("Stats collected: ");
+            System.out.println(statsPrinter.getStats(statsCollector.collectAllStats()));
+
             return 0;
         } catch (Exception e) {
-            System.out.println("Error occured: " + e.getMessage());
+            System.out.println("Error occurred: " + e.getMessage());
             return 1;
         }
-
     }
 }
