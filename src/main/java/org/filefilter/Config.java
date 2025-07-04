@@ -1,5 +1,7 @@
 package org.filefilter;
 
+import org.filefilter.stats.StatType;
+
 import java.util.List;
 
 public class Config {

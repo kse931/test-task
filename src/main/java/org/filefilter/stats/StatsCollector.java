@@ -1,27 +1,21 @@
-package org.filefilter;
+package org.filefilter.stats;
 
 import java.util.*;
 
-public class StatsCollector {
+public class StatsCollector implements IStatsCollector{
 
-    private final UtilFileFilter utilFileFilter;
-
-    public StatsCollector(UtilFileFilter utilFileFilter){
-        this.utilFileFilter = utilFileFilter;
-    }
-
-    public Map<String, Map<String, Object>> collectAllStats(){
+    public Map<String, Map<String, Object>> collectAllStats(Map<String, List<?>> buffer){
         Map<String, Map<String, Object>> allStats = new HashMap<>();
 
-        collectIntStats(allStats);
-        collectDoubleStats(allStats);
-        collectStringStats(allStats);
+        collectIntStats(allStats, buffer);
+        collectDoubleStats(allStats, buffer);
+        collectStringStats(allStats, buffer);
 
         return allStats;
     }
 
-    private void collectIntStats (Map<String, Map<String, Object>> allStats) {
-        List<Long> ints = utilFileFilter.getIntegerPrintQueue();
+    private void collectIntStats (Map<String, Map<String, Object>> allStats, Map<String, List<?>> buffer) { //TODO: remake stats collection and stats print
+        List<Long> ints = (List<Long>) buffer.get("Integers");
         if (!ints.isEmpty()){
             LongSummaryStatistics intStats = ints.stream()
                     .mapToLong(Long::longValue)
@@ -38,8 +32,8 @@ public class StatsCollector {
         }
     }
 
-    private void collectDoubleStats (Map<String, Map<String, Object>> allStats) {
-        List<Double> doubles = utilFileFilter.getDoublesPrintQueue();
+    private void collectDoubleStats (Map<String, Map<String, Object>> allStats, Map<String, List<?>> buffer) {
+        List<Double> doubles = (List<Double>) buffer.get("Doubles");
         if (!doubles.isEmpty()){
             DoubleSummaryStatistics doubleStats = doubles.stream()
                     .mapToDouble(Double::doubleValue)
@@ -56,8 +50,8 @@ public class StatsCollector {
         }
     }
 
-    private void collectStringStats(Map<String, Map<String, Object>> allStats){
-        List<String> strings = utilFileFilter.getStringsPrintQueue();
+    private void collectStringStats(Map<String, Map<String, Object>> allStats, Map<String, List<?>> buffer){
+        List<String> strings = (List<String>) buffer.get("Strings");
         if (!strings.isEmpty()){
             Map<String, Object> stringStats = new HashMap<>();
             stringStats.put("count", strings.size());

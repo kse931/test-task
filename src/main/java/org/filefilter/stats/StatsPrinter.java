@@ -1,8 +1,10 @@
-package org.filefilter;
+package org.filefilter.stats;
+
+import org.filefilter.Config;
 
 import java.util.Map;
 
-public class StatsPrinter {
+public class StatsPrinter implements IStatsPrinter{
 
     private final StatType typeToPrint;
 

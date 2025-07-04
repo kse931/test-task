@@ -1,4 +1,6 @@
-package org.filefilter;
+package org.filefilter.filters;
+
+import org.filefilter.Config;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -7,9 +9,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class UtilFileFilter {
+public class UtilFileFilter implements IFilesFilter{
 
     private final Config configuration;
 
@@ -21,10 +25,15 @@ public class UtilFileFilter {
         this.configuration = configuration;
     }
 
-    public void processFiles() throws IOException{
+    public Map<String, List<?>> processFiles() throws IOException{
         for (String name : configuration.getInputFiles()){
             processFile(name);
         }
+        Map<String, List<?>> output = new HashMap<>();
+        output.put("Strings", stringsPrintQueue);
+        output.put("Integers", integerPrintQueue);
+        output.put("Doubles", doublesPrintQueue);
+        return output;
     }
 
     private void processFile(String inputFileName) throws IOException{

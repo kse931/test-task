@@ -1,5 +1,9 @@
 package org.filefilter;
 
+import org.filefilter.filters.UtilFileFilter;
+import org.filefilter.printers.UtilFilePrinter;
+import org.filefilter.stats.StatsCollector;
+import org.filefilter.stats.StatsPrinter;
 import picocli.CommandLine;
 import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Option;
@@ -7,7 +11,6 @@ import picocli.CommandLine.Command;
 
 import java.util.List;
 import java.util.concurrent.Callable;
-
 
 @Command(name = "util", mixinStandardHelpOptions = true,
         description = "Distributes different types of data from the input file across several")
@@ -39,21 +42,12 @@ public class Main implements Callable<Integer> {
     @Override
     public Integer call() {
         try {
-            System.out.println("Processing...");
-
             Config utilConfig = new Config(outputDirectory, prefix, append, fullStats, shortStats, inputFiles);
-            UtilFileFilter utilFileFilter = new UtilFileFilter(utilConfig);
-            utilFileFilter.processFiles();
-
-            UtilFilePrinter ufp = new UtilFilePrinter(utilFileFilter);
-            ufp.printToFiles();
-            System.out.println("Finished");
-            StatsCollector statsCollector = new StatsCollector(utilFileFilter);
-            StatsPrinter statsPrinter = new StatsPrinter(utilConfig);
-            System.out.println("Stats collected: ");
-            System.out.println(statsPrinter.getStats(statsCollector.collectAllStats()));
-
+            ApplicationProcess applicationProcess = new ApplicationProcess(new UtilFileFilter(utilConfig), new StatsCollector(),
+                    new UtilFilePrinter(utilConfig), new StatsPrinter(utilConfig));
+            applicationProcess.begin();
             return 0;
+
         } catch (Exception e) {
             System.out.println("Error occurred: " + e.getMessage());
             return 1;

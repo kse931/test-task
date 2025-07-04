@@ -1,4 +1,4 @@
-package org.filefilter;
+package org.filefilter.stats;
 
 public enum StatType {
     FULL,
