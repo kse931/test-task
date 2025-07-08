@@ -5,5 +5,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface IFilesPrinter {
-    public void printToFiles(Map<String, List<?>> buffer) throws IOException;
+    void printToFiles(Map<String, List<?>> buffer) throws IOException;
 }

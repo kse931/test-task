@@ -25,9 +25,9 @@ public class ApplicationProcess {
     public void begin() throws Exception {
         System.out.println("Processing...");
         Map<String, List<?>> buffer = fileFilter.processFiles();
-        System.out.println("Finished");
+
         filesPrinter.printToFiles(buffer);
-        System.out.println("Requested stats: ");
-        System.out.println(statsPrinter.getStats(statsCollector.collectAllStats(buffer)));
+
+        System.out.println("Requested stats: \n" + statsPrinter.getStats(statsCollector.collectAllStats(buffer)));
     }
 }

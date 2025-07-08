@@ -14,7 +14,7 @@ public class StatsCollector implements IStatsCollector{
         return allStats;
     }
 
-    private void collectIntStats (Map<String, Map<String, Object>> allStats, Map<String, List<?>> buffer) { //TODO: remake stats collection and stats print
+    private void collectIntStats (Map<String, Map<String, Object>> allStats, Map<String, List<?>> buffer) {
         List<Long> ints = (List<Long>) buffer.get("Integers");
         if (!ints.isEmpty()){
             LongSummaryStatistics intStats = ints.stream()

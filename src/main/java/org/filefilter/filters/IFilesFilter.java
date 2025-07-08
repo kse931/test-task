@@ -5,5 +5,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface IFilesFilter {
-    public Map<String, List<?>> processFiles() throws IOException;
+    Map<String, List<?>> processFiles() throws IOException;
 }

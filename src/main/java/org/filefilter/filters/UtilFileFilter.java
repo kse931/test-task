@@ -73,20 +73,4 @@ public class UtilFileFilter implements IFilesFilter{
 
     }
 
-    public Config getConfiguration() {
-        return configuration;
-    }
-
-    public List<String> getStringsPrintQueue() {
-        return stringsPrintQueue;
-    }
-
-    public List<Long> getIntegerPrintQueue() {
-        return integerPrintQueue;
-    }
-
-    public List<Double> getDoublesPrintQueue() {
-        return doublesPrintQueue;
-    }
-
 }
